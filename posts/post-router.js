@@ -6,7 +6,15 @@ const db = require('../data/db-config.js');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-
+    db
+    .select('*')
+    .from('posts')
+    .then(posts => {
+        res.status(200).json(posts)
+    })
+    .catch(err => {
+        res.status(500).json(err)
+    });
 });
 
 router.get('/:id', (req, res) => {
